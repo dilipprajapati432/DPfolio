@@ -2,110 +2,88 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Definition of the design system. All colors, gradients, fonts, etc should be defined here. 
-All colors MUST be HSL.
-*/
-
 @layer base {
   :root {
-    --background: 220 50% 10%;
-    --foreground: 0 0% 95%;
+    --background: 230 35% 3%;
+    --foreground: 210 40% 98%;
 
-    --card: 220 40% 15%;
-    --card-foreground: 0 0% 95%;
+    --card: 230 35% 4%;
+    --card-foreground: 210 40% 98%;
 
-    --popover: 220 40% 12%;
-    --popover-foreground: 0 0% 95%;
+    --popover: 230 35% 4%;
+    --popover-foreground: 210 40% 98%;
 
-    --primary: 210 100% 50%;
-    --primary-foreground: 0 0% 100%;
+    --primary: 180 100% 50%;
+    --primary-foreground: 230 35% 3%;
 
-    --secondary: 220 40% 20%;
-    --secondary-foreground: 0 0% 95%;
+    --secondary: 260 85% 65%;
+    --secondary-foreground: 210 40% 98%;
 
-    --muted: 220 30% 25%;
-    --muted-foreground: 0 0% 70%;
+    --muted: 230 20% 12%;
+    --muted-foreground: 215 20% 70%;
 
-    --accent: 180 100% 50%;
-    --accent-foreground: 220 50% 10%;
+    --accent: 190 100% 50%;
+    --accent-foreground: 230 35% 3%;
 
     --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 0 0% 98%;
+    --destructive-foreground: 210 40% 98%;
 
-    --border: 220 30% 25%;
-    --input: 220 40% 20%;
-    --ring: 210 100% 50%;
+    --border: 230 20% 12%;
+    --input: 230 20% 12%;
+    --ring: 180 100% 50%;
 
     --radius: 0.75rem;
-
-    --gradient-start: 220 50% 10%;
-    --gradient-end: 240 50% 15%;
-    
-    --glass-bg: 220 40% 15%;
-    --glass-border: 210 100% 50%;
   }
 }
 
 @layer base {
   * {
-    @apply border-border;
+    @apply border-border selection:bg-primary/20 selection:text-primary;
   }
-
   body {
-    @apply bg-gradient-to-br from-[hsl(var(--gradient-start))] to-[hsl(var(--gradient-end))] text-foreground;
-    font-family: 'Inter', system-ui, -apple-system, sans-serif;
-  }
-
-  h1, h2, h3, h4, h5, h6 {
-    font-family: 'Poppins', system-ui, -apple-system, sans-serif;
-  }
-
-  html {
-    scroll-behavior: smooth;
+    @apply bg-background text-foreground antialiased;
+    font-feature-settings: "ss01", "ss02", "cv01", "cv02";
   }
 }
 
 @layer components {
   .glass-card {
-    @apply bg-[hsl(var(--glass-bg))]/40 backdrop-blur-xl border border-[hsl(var(--glass-border))]/20 rounded-xl;
-  }
-
-  .section-padding {
-    @apply py-20 px-6 md:px-12 lg:px-24;
+    @apply bg-white/[0.03] backdrop-blur-xl border border-white/10 shadow-2xl;
   }
 
   .gradient-text {
-    @apply bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent;
+    @apply bg-clip-text text-transparent bg-gradient-to-r from-primary via-white to-secondary;
+  }
+
+  .section-padding {
+    @apply py-20 md:py-32;
+  }
+
+  .heading-xl {
+    @apply text-5xl md:text-7xl font-black tracking-tighter mb-6 uppercase italic;
+  }
+
+  .heading-lg {
+    @apply text-3xl md:text-5xl font-black tracking-tighter mb-4 uppercase;
   }
 }
 
-@layer utilities {
-  .animate-fade-in-up {
-    animation: fadeInUp 0.6s ease-out forwards;
-  }
-
-  .animate-float {
-    animation: float 3s ease-in-out infinite;
-  }
-
-  @keyframes fadeInUp {
-    from {
-      opacity: 0;
-      transform: translateY(30px);
-    }
-    to {
-      opacity: 1;
-      transform: translateY(0);
-    }
-  }
-
-  @keyframes float {
-    0%, 100% {
-      transform: translateY(0px);
-    }
-    50% {
-      transform: translateY(-20px);
-    }
-  }
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-20px); }
 }
 
+.animate-float {
+  animation: float 6s ease-in-out infinite;
+}
+
+.reveal {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: all 0.6s ease-out;
+}
+
+.reveal.active {
+  opacity: 1;
+  transform: translateY(0);
+}
